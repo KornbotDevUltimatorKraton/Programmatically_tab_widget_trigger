@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tab Widget with JavaScript Trigger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .tab-container {
+      width: 300px;
+      margin: 20px auto;
+    }
+    .tabs {
+      display: flex;
+      cursor: pointer;
+      border-bottom: 2px solid #ccc;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      border-bottom: none;
+    }
+    .tab.active {
+      background: #fff;
+      font-weight: bold;
+      border-top: 2px solid #007bff;
+      border-right: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .triggers {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .trigger-button {
+      margin: 5px;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .trigger-button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab-container">
+    <div class="tabs">
+      <div class="tab" data-tab="1">City</div>
+      <div class="tab" data-tab="2">Country</div>
+      <div class="tab" data-tab="3">Continent</div>
+    </div>
+    <div class="tab-content" id="tab-1">Content for City</div>
+    <div class="tab-content" id="tab-2">Content for Country</div>
+    <div class="tab-content" id="tab-3">Content for Continent</div>
+  </div>
+
+  <div class="triggers">
+    <button class="trigger-button" onclick="switchTab(1)">Go to City</button>
+    <button class="trigger-button" onclick="switchTab(2)">Go to Country</button>
+    <button class="trigger-button" onclick="switchTab(3)">Go to Continent</button>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        activateTab(tabId);
+      });
+    });
+
+    function activateTab(tabId) {
+      tabs.forEach(tab => tab.classList.remove('active'));
+      contents.forEach(content => content.classList.remove('active'));
+
+      document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    function switchTab(tabId) {
+      activateTab(tabId);
+    }
+
+    // Set the default active tab
+    activateTab(1);
+  </script>
+</body>
+</html>

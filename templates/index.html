@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Widget</title>
+    <style>
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .tab-buttons button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-buttons">
+        <button onclick="openTab(0)">Tab 1</button>
+        <button onclick="openTab(1)">Tab 2</button>
+        <button onclick="openTab(2)">Tab 3</button>
+    </div>
+    <div class="tabs">
+        <div class="tab active">Content of Tab 1</div>
+        <div class="tab">Content of Tab 2</div>
+        <div class="tab">Content of Tab 3</div>
+    </div>
+
+    <script>
+        let currentTab = 0;
+
+        function openTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+        }
+
+        function autoSwitchTabs() {
+            const totalTabs = document.querySelectorAll('.tab').length;
+            currentTab = (currentTab + 1) % totalTabs; // Move to the next tab
+            openTab(currentTab);
+        }
+
+        // Automatically switch tabs every 3 seconds
+        setInterval(autoSwitchTabs, 3000);
+    </script>
+</body>
+</html>
